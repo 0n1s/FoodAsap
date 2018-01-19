@@ -1,0 +1,62 @@
+<?xml version="1.0" encoding="utf-8"?>
+<manifest xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    package="comm.food.asap">
+
+    <uses-permission android:name="android.permission.INTERNET" />
+
+    <application
+        android:allowBackup="true"
+        android:icon="@mipmap/ic_launcher"
+        android:label="@string/app_name"
+        android:supportsRtl="true"
+        tools:replace="android:icon">
+        android:theme="@style/AppTheme">
+        <activity
+            android:name="comm.food.asap.LoginActivity"
+            android:label="@string/app_name"
+            android:theme="@style/AppTheme.NoActionBar" />
+        <activity
+            android:name="comm.food.asap.MainActivity"
+            android:label="Dkut restaurant"
+            android:theme="@style/AppTheme.NoActionBar" >
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
+
+                <category android:name="android.intent.category.LAUNCHER" />
+            </intent-filter>
+
+        </activity>
+        <activity
+            android:name="comm.food.asap.SignupActivity"
+            android:label="Sign Up"
+            android:theme="@style/AppTheme.NoActionBar" />
+        <activity
+            android:name="comm.food.asap.SignIN"
+            android:label="Dkut restraunt"
+            android:theme="@style/AppTheme.NoActionBar">
+
+        </activity>
+        <activity
+            android:name="comm.food.asap.Grocery"
+            android:label="Select Item"
+            android:theme="@style/AppTheme.NoActionBar" />
+        <activity
+            android:name="comm.food.asap.Utensils"
+            android:label="Previous Shopping Lists"
+            android:theme="@style/AppTheme.NoActionBar" />
+        <activity
+            android:name="comm.food.asap.Events"
+            android:label="@string/title_activity_events"
+            android:theme="@style/AppTheme.NoActionBar" />
+        <activity
+            android:name="comm.food.asap.Details"
+            android:label="@string/title_activity_details"
+            android:theme="@style/AppTheme.NoActionBar" />
+        <activity
+            android:name="comm.food.asap.Cart"
+            android:label="@string/title_activity_cart"
+            android:theme="@style/AppTheme.NoActionBar"></activity>
+    </application>
+
+</manifest>
