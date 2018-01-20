@@ -1,11 +1,13 @@
 package comm.food.asap;
 
+import android.app.Activity;
 import android.app.ProgressDialog;
 import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.content.res.ColorStateList;
 import android.os.Bundle;
+import android.provider.Settings;
 import android.support.design.widget.FloatingActionButton;
 import android.support.v7.widget.GridLayoutManager;
 import android.support.v7.widget.RecyclerView;
@@ -38,6 +40,8 @@ import org.json.JSONObject;
 import java.util.ArrayList;
 import java.util.List;
 
+import static comm.food.asap.URLs.device_id;
+
 public class MainActivity extends AppCompatActivity
         implements NavigationView.OnNavigationItemSelectedListener {
     public static int item_id=0;
@@ -63,6 +67,9 @@ public class MainActivity extends AppCompatActivity
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
 
+
+         device_id = Settings.Secure.getString(this.getContentResolver(),
+                 Settings.Secure.ANDROID_ID);
 
         getSupportActionBar().setTitle("Food Asap");
 
@@ -314,6 +321,23 @@ public class MainActivity extends AppCompatActivity
             startActivity(intent);
         }
 
+        if(id == R.id.chat)
+        {
+
+
+            Intent intent =  new Intent(MainActivity.this, ActivityChat.class);
+            intent.putExtra("chat_type", "client");
+
+            SharedPreferences.Editor editor = sharedpreferences.edit();
+            editor.putString("chat_type", "client");
+            editor.commit();
+
+            startActivity(intent);
+
+
+
+        }
+
         if (id == R.id.logout)
         {
             SharedPreferences.Editor editor = sharedpreferences.edit();
@@ -322,7 +346,6 @@ public class MainActivity extends AppCompatActivity
             editor.putString("phone", "");
             editor.putString("location", "");
             editor.commit();
-
             startActivity(new Intent(MainActivity.this, SignIN.class));
             this.finish();
         }

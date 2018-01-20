@@ -1,0 +1,55 @@
+{
+  "project_info": {
+    "project_number": "598170042492",
+    "firebase_url": "https://food-asap-21dbb.firebaseio.com",
+    "project_id": "food-asap-21dbb",
+    "storage_bucket": "food-asap-21dbb.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:598170042492:android:36c338e3cfc96930",
+        "android_client_info": {
+          "package_name": "code0.FoodAsap"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "598170042492-h6cagdkjae93g8ggf8qco41gme8rned6.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "code0.FoodAsap",
+            "certificate_hash": "3793fefcd7b9ad28b270b902e6af142df24e4ed1"
+          }
+        },
+        {
+          "client_id": "598170042492-fpmfrevp3n3ljotmbi5t49tuhj08ldhn.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyAS49XyhxnriSbvlsqpSoJ2OhvMnR2j2XA"
+        }
+      ],
+      "services": {
+        "analytics_service": {
+          "status": 1
+        },
+        "appinvite_service": {
+          "status": 2,
+          "other_platform_oauth_client": [
+            {
+              "client_id": "598170042492-fpmfrevp3n3ljotmbi5t49tuhj08ldhn.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        },
+        "ads_service": {
+          "status": 2
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

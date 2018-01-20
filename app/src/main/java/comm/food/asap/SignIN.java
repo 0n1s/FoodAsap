@@ -33,7 +33,7 @@ public class SignIN extends AppCompatActivity {
     TextView _signupLink;
     private static final String TAG = "LoginActivity";
     private static final int REQUEST_SIGNUP = 0;
-    SharedPreferences sharedpreferences;
+    public static  SharedPreferences sharedpreferences;
 
 
    // http:///Maathai/new.php
@@ -41,6 +41,7 @@ public class SignIN extends AppCompatActivity {
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
+
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_sign_in);
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
@@ -105,32 +106,17 @@ public class SignIN extends AppCompatActivity {
         String email = _emailText.getText().toString();
         String password = _passwordText.getText().toString();
 
+        if(email.equals("admin@gmail.com") && password.equals("admin"))
+        {
+            useruser="admin@gmail.com";
+            startActivity(new Intent(SignIN.this, ChatList.class));
+        }
+        else
         loginnow(email,password);
 
 
     }
 
-//    @Override
-//    public boolean onCreateOptionsMenu(Menu menu) {
-//        // Inflate the menu; this adds items to the action bar if it is present.
-//        getMenuInflater().inflate(R.menu.menu_sign_in, menu);
-//        return true;
-//    }
-//
-//    @Override
-//    public boolean onOptionsItemSelected(MenuItem item) {
-//        // Handle action bar item clicks here. The action bar will
-//        // automatically handle clicks on the Home/Up button, so long
-//        // as you specify a parent activity in AndroidManifest.xml.
-//        int id = item.getItemId();
-//
-//        //noinspection SimplifiableIfStatement
-//        if (id == R.id.action_settings) {
-//            return true;
-//        }
-//
-//        return super.onOptionsItemSelected(item);
-//    }
 
     public void rememberme(final String email,final String password)
     {
@@ -187,18 +173,20 @@ public class SignIN extends AppCompatActivity {
     {
 
 
+        Log.d("returned_data", s);
 
         try {
             JSONObject json = new JSONObject(s);
             JSONArray array = json.getJSONArray("result");
             JSONObject c = array.getJSONObject(0);
             String succes =c.getString("succes");
-            String phone = c.getString("phone");
-            String location = c.getString("location");
+
 
             if (succes.equals("1"))
             {
 
+                String phone = c.getString("phone");
+                String location = c.getString("location");
                 useruser=email;
                 rememberme(email, password);
 
@@ -217,7 +205,7 @@ public class SignIN extends AppCompatActivity {
 
 
             }
-            else if (succes.equals(0))
+            else if (succes.equals("0"))
             {
                 Toast.makeText(getBaseContext(), "Login failed", Toast.LENGTH_SHORT).show();
             }
