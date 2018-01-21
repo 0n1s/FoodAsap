@@ -17,18 +17,15 @@ import android.widget.ListView;
 import android.widget.SimpleAdapter;
 import android.widget.TextView;
 import android.widget.Toast;
-
 import com.android.volley.Request;
 import com.android.volley.RequestQueue;
 import com.android.volley.Response;
 import com.android.volley.VolleyError;
 import com.android.volley.toolbox.StringRequest;
 import com.android.volley.toolbox.Volley;
-
 import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
-
 import java.util.ArrayList;
 import java.util.HashMap;
 
@@ -56,16 +53,17 @@ public class ChatList extends AppCompatActivity
 
                 TextView usernmame = (TextView)view.findViewById(R.id.textView27);
 
+                String us = usernmame.getText().toString();
                 SharedPreferences.Editor editor = sharedpreferences.edit();
                 editor.putString("chat_type", "admin");
                 editor.putString("chat_user", usernmame.getText().toString());
                 editor.commit();
 
+                //Toast.makeText(ChatList.this, us, Toast.LENGTH_SHORT).show();
 
                 Intent intent = new Intent(ChatList.this, ActivityChat.class);
                 intent.putExtra("chat_user", "");
                 startActivity(intent);
-
 
 
 

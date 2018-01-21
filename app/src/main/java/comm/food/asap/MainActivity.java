@@ -32,6 +32,7 @@ import com.android.volley.VolleyError;
 import com.android.volley.toolbox.StringRequest;
 import com.android.volley.toolbox.Volley;
 import com.beardedhen.androidbootstrap.TypefaceProvider;
+import com.google.firebase.crash.FirebaseCrash;
 
 import org.json.JSONArray;
 import org.json.JSONException;
@@ -67,7 +68,7 @@ public class MainActivity extends AppCompatActivity
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
 
-
+        FirebaseCrash.log("Activity created");
          device_id = Settings.Secure.getString(this.getContentResolver(),
                  Settings.Secure.ANDROID_ID);
 
@@ -327,11 +328,9 @@ public class MainActivity extends AppCompatActivity
 
             Intent intent =  new Intent(MainActivity.this, ActivityChat.class);
             intent.putExtra("chat_type", "client");
-
             SharedPreferences.Editor editor = sharedpreferences.edit();
             editor.putString("chat_type", "client");
             editor.commit();
-
             startActivity(intent);
 
 

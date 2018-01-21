@@ -1,5 +1,6 @@
 package comm.food.asap;
 
+import android.app.AlertDialog;
 import android.app.ProgressDialog;
 import android.graphics.Color;
 import android.os.AsyncTask;
@@ -117,19 +118,16 @@ phone =(EditText)findViewById(R.id.input_phone);
 
     public void register(final String email,final String password,final String name, final String phone_numer, final String location) {
 
-        class GetJSON extends AsyncTask<Void, Void, String> {
+        class GetJSON extends AsyncTask<Void, Void, String>
+        {
 
             ProgressDialog loading;
-            SweetAlertDialog pDialog = new SweetAlertDialog(SignupActivity.this, SweetAlertDialog.PROGRESS_TYPE);
-
             @Override
             protected void onPreExecute() {
                 super.onPreExecute();
-
-                pDialog.getProgressHelper().setBarColor(Color.parseColor("#A5DC86"));
-                pDialog.setTitleText("Registering...");
-                pDialog.setCancelable(false);
-                pDialog.show();
+                loading= new ProgressDialog(SignupActivity.this);
+                loading.setMessage("Registering..");
+                loading.show();
             }
 
             @Override
@@ -147,12 +145,11 @@ phone =(EditText)findViewById(R.id.input_phone);
             }
 
             @Override
-            protected void onPostExecute(String s) {
+            protected void onPostExecute(String s)
+            {
                 super.onPostExecute(s);
-                pDialog.dismiss();
+                loading.dismiss();
                 showthem(s);
-               // Toast.makeText(SignupActivity.this, s, Toast.LENGTH_SHORT).show();
-
             }
 
 
@@ -171,24 +168,17 @@ phone =(EditText)findViewById(R.id.input_phone);
             JSONObject jss = array.getJSONObject(0);
             String succes = jss.getString("status");
             if (succes.equals("1")) {
-                new SweetAlertDialog(this,SweetAlertDialog.SUCCESS_TYPE)
-                        .setTitleText("Huuuuray!!")
-                        .setContentText("Registration succesifull")
-                        .show();
+
+                new AlertDialog.Builder(SignupActivity.this).setMessage("Registration success").show();
 
             }
             else if (succes.equals("0"))
             {
-                new SweetAlertDialog(this,SweetAlertDialog.ERROR_TYPE)
-                        .setTitleText("Ooops!!")
-                        .setContentText("Registration Failed")
-                        .show();
+                new AlertDialog.Builder(SignupActivity.this).setMessage("Registration failed").show();
             }
 
         } catch (JSONException e) {
-            new SweetAlertDialog(this,SweetAlertDialog.ERROR_TYPE)
-                    .setTitleText(e.toString())
-                    .show();
+            new AlertDialog.Builder(SignupActivity.this).setMessage(String.valueOf(e)).show();
         }
 
     }

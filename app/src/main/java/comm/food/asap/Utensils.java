@@ -139,8 +139,8 @@ public class Utensils extends AppCompatActivity {
                     price = jo.getString("price");
                     String trxID = jo.getString("trxID");
                     //String name = jo.getString("food_name");
-                    StringBuilder  builder = new StringBuilder();
-                    JSONArray jsonArray = new JSONArray(content);
+                   // StringBuilder  builder = new StringBuilder();
+                    //JSONArray jsonArray = new JSONArray(content);
 
 //                    for (int ii = 0; ii < jsonArray.length(); ii++)
 //                    {

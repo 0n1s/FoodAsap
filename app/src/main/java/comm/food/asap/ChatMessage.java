@@ -57,12 +57,13 @@ public class ChatMessage
     private String Message_type;
     private String Message_text;
 
-    public ChatMessage(String message_type, String message_text, String message_sender, String message_time, String messge_id) {
+    public ChatMessage(String message_type, String message_text, String message_sender, String message_time, String messge_id,String receiver) {
         Message_type = message_type;
         Message_text = message_text;
         Message_sender = message_sender;
         Message_time = message_time;
         Messge_id = messge_id;
+        Receiver = receiver;
     }
 
     public ChatMessage() {
@@ -72,5 +73,15 @@ public class ChatMessage
     private String Message_time;
     private String Messge_id;
 
+    public String getReceiver() {
+        return Receiver;
+    }
+
+    public void setReceiver(String receiver) {
+        Receiver = receiver;
+    }
+
+
+    private String Receiver;
 
 }

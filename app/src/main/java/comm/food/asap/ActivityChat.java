@@ -37,7 +37,7 @@ import static comm.food.asap.URLs.device_id;
 
 public class ActivityChat extends Activity
 {
-   // private FirebaseListAdapter<ChatMessage> adapter;
+
     ChatView mChatView;
     String msgfrom, msgto="joseph", chattype="";
     String who;
@@ -78,10 +78,12 @@ public class ActivityChat extends Activity
             public void onDataChange(DataSnapshot dataSnapshot)
             {
 
+              //  Toast.makeText(ActivityChat.this, "Data changed!", Toast.LENGTH_SHORT).show();
             }
 
             @Override
-            public void onCancelled(DatabaseError databaseError) {
+            public void onCancelled(DatabaseError databaseError)
+            {
                 Toast.makeText(ActivityChat.this, String.valueOf(databaseError), Toast.LENGTH_SHORT).show();
             }
         });
@@ -94,35 +96,48 @@ public class ActivityChat extends Activity
 
                 ChatMessage chat = dataSnapshot.getValue(ChatMessage.class);
 
+                //ChatMessage send_msg = new ChatMessage(chat_type, sms, useruser , String.valueOf(message_id) , String.valueOf(message_id),receiver);
+
+
+
+               // Toast.makeText(ActivityChat.this, "Data received!", Toast.LENGTH_SHORT).show();
+
                 String message_sender=chat.getMessage_sender();
 
                 String chatType=chat.getMessage_type();
 
                 String Message_text=chat.getMessage_text();
 
+                String message_receiver = chat.getReceiver();
 
-              //  Toast.makeText(ActivityChat.this, chat_type, Toast.LENGTH_SHORT).show();
+                //Toast.makeText(ActivityChat.this, chat_type, Toast.LENGTH_SHORT).show();
 
                 if(chat_type.equals("admin"))
                 {
-                   // String  chat_user = sharedpreferences.getString("chat_user", "null");
 
-                        if(message_sender.equals("admin@gmail.com"))
-                        {
-                            Bitmap myIcon = null;
-                            User me = new User(1, useruser, myIcon);
-                            Message message = new Message.Builder()
-                                    .setUser(me)
-                                    .setRightMessage(true)
-                                    .setMessageText(Message_text)
-                                    .hideIcon(true)
-                                    .build();
-                            mChatView.send(message);
-                        }
-                        else
+
+                    String chat_user= sharedpreferences.getString("chat_user",  "null");
+
+                    Log.d("chat_data", "starting here!...");
+
+                    Log.d("chat_data","Mesage sender -> "+ String.valueOf(chat.getMessage_sender()));
+
+                    Log.d("chat_data","Mesage receiver -> "+ String.valueOf(chat.getReceiver()));
+
+                    Log.d("chat_data","Mesage  -> "+ String.valueOf(chat.getMessage_text()));
+
+                    Log.d("chat_data","Chat_type  -> "+ String.valueOf(chat.getMessage_type()));
+
+                    Log.d("chat_data", "charted_user->" +chat_user);
+
+
+                    if(message_receiver.equals(chat_user) || message_sender.equals(chat_user))
+                    {
+                        if(message_sender.equals(chat_user))
+
                         {
                             Bitmap yourIcon = null;
-                            User you = new User(2,message_sender , yourIcon);
+                            User you = new User(2, "", yourIcon);
                             Message receivedMessage = new Message.Builder()
                                     .setUser(you)
                                     .setRightMessage(false)
@@ -131,6 +146,24 @@ public class ActivityChat extends Activity
                                     .build();
                             mChatView.receive(receivedMessage);
                         }
+                        else
+                            {
+
+
+
+
+                            Bitmap myIcon = null;
+                            User me = new User(1, "", myIcon);
+                            Message message = new Message.Builder()
+                                    .setUser(me)
+                                    .setRightMessage(true)
+                                    .setMessageText(Message_text)
+                                    .hideIcon(true)
+                                    .build();
+                            mChatView.send(message);
+                        }
+                    }
+
 
 
 
@@ -138,34 +171,56 @@ public class ActivityChat extends Activity
                 else
                 {
 
-                    if(chatType.equals(chat_type) && message_sender.equals(useruser))
+
+                    Log.d("chat_data2", "starting here!...");
+
+                    Log.d("chat_data2","Mesage sender -> "+ String.valueOf(chat.getMessage_sender()));
+
+                    Log.d("chat_data2","Mesage receiver -> "+ String.valueOf(chat.getReceiver()));
+
+                    Log.d("chat_data2","Mesage  -> "+ String.valueOf(chat.getMessage_text()));
+
+                    Log.d("chat_data2","Chat_type  -> "+ String.valueOf(chat.getMessage_type()));
+
+                    Log.d("chat_data2", "current user ->"+useruser);
+
+                    if(message_receiver.equals(useruser) || message_sender.equals(useruser))
                     {
-                        Bitmap myIcon = null;
-                        User me = new User(1, useruser, myIcon);
-                        Message message = new Message.Builder()
-                                .setUser(me)
-                                .setRightMessage(true)
-                                .setMessageText(Message_text)
-                                .hideIcon(true)
-                                .build();
-                        mChatView.send(message);
+                        if(message_sender.equals("admin@gmail.com"))
+                        {
+
+
+                            Bitmap yourIcon = null;
+                            User you = new User(2,"" , yourIcon);
+                            Message receivedMessage = new Message.Builder()
+                                    .setUser(you)
+                                    .setRightMessage(false)
+                                    .setMessageText(Message_text)
+                                    .hideIcon(true)
+                                    .build();
+                            mChatView.receive(receivedMessage);
+
+                        }
+                        else
+                        {
+
+
+
+
+                            Bitmap myIcon = null;
+                            User me = new User(1, "", myIcon);
+                            Message message = new Message.Builder()
+                                    .setUser(me)
+                                    .setRightMessage(true)
+                                    .setMessageText(Message_text)
+                                    .hideIcon(true)
+                                    .build();
+                            mChatView.send(message);
+                        }
                     }
-                    else
-                    {
-                        Bitmap yourIcon = null;
-                        User you = new User(2,useruser , yourIcon);
-                        Message receivedMessage = new Message.Builder()
-                                .setUser(you)
-                                .setRightMessage(false)
-                                .setMessageText(Message_text)
-                                .hideIcon(true)
-                                .build();
-                        mChatView.receive(receivedMessage);
-                    }
+
 
                 }
-
-
 
 
 
@@ -217,21 +272,23 @@ public class ActivityChat extends Activity
                 String sms= mChatView.getInputText();
                 mChatView.setInputText("");
                 Date d= new Date();
-
                 Long message_id = new Date().getTime();
-
-                if(useruser==null)
+                String receiver;
+                if(useruser=="admin@gmail.com")
                 {
-                   useruser = device_id;
-                   chat_type= "client";
+                   receiver= sharedpreferences.getString("chat_user", "null");
+                }
+                else
+                {
+                    receiver="admin@gmail.com";
                 }
 
-                ChatMessage send_msg=new ChatMessage(chat_type, sms, useruser , String.valueOf(message_id) , String.valueOf(message_id));
+               // Toast.makeText(ActivityChat.this, receiver, Toast.LENGTH_SHORT).show();
+                ChatMessage send_msg = new ChatMessage(chat_type, sms, useruser , String.valueOf(message_id) , String.valueOf(message_id),receiver);
                 FirebaseDatabase.getInstance()
                         .getReference()
                         .push()
                         .setValue(send_msg);
-
 
 
                 if(chat_type.equals("client"))
